@@ -18,7 +18,7 @@ import { UserValidation } from "@/lib/validations/user";
 import * as z from "zod";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 import { isBase64Image } from "@/lib/utils";
 import {useUploadThing} from '@/lib/uploadthing'
 import { updateUser } from "@/lib/actions/user.actions";
@@ -99,9 +99,13 @@ await updateUser({
   bio:values.bio,
  image:values.profile_photo,
   path:pathname
-}
+})
 
-)
+if(pathname=== '/profile/edit'){
+  router.back()
+}else{
+  router.push('/')
+}
 
 }
   return (
@@ -144,6 +148,7 @@ await updateUser({
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
+              <FormMessage/>
             </FormItem>
           )}
         />
@@ -161,6 +166,7 @@ await updateUser({
                   {...field}
                 />
               </FormControl>
+              <FormMessage/>
             </FormItem>
           )}
         />
@@ -178,6 +184,7 @@ await updateUser({
                 {...field}
               />
               </FormControl>
+              <FormMessage/>
             </FormItem>
           )}
         />
@@ -195,6 +202,7 @@ await updateUser({
                 {...field}
               />
               </FormControl>
+              <FormMessage/>
             </FormItem>
           )}
         />
